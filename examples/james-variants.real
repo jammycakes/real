@@ -1,0 +1,46 @@
+regex james-variants {
+    ignore-case
+
+    start-of-string
+
+    "j"
+    one-of {
+        sequence {
+            "am"
+            one-of {
+                ( "mycak"? "es" )
+                "ie"
+            }
+        }
+        "sequence {
+            "im"
+            one-of {
+                ( "bo" "b"? )
+                "my"
+            }
+        }"
+    }
+
+    end-of-string
+
+    test {
+        it "should match common variants of 'James'" {
+            match "james"
+            match "jamie"
+            match "jammycakes"
+            match "jimbo"
+            match "jimbob"
+            match "jimmy"
+        }
+
+        it "should not match specifically excluded variant 'Jim'" {
+            no-match "jim"
+        }
+
+        it "should be case insensitive" {
+            match "jAMES"
+            match "Jamie"
+            match "JIMBO"
+        }
+    }
+}
