@@ -49,6 +49,8 @@ When editing code
 - Run `pnpm build` and then run the compiler on representative fixtures/examples.
 - Add unit-like fixtures under [fixtures](fixtures) when adding features or fixing bugs.
 - Keep changes minimal and document rationale in TODOs or PR descriptions when spec changes are needed.
+- Respect the repository .editorconfig (Markdown wrapped to 100 columns).
+
 
 Where to look for examples
 

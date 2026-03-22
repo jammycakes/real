@@ -1,1 +1,4 @@
-console.log("REAL compiler (WIP)");
+import { Real } from "./real";
+
+export { Real };
+export default Real;
