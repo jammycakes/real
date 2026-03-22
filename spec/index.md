@@ -138,7 +138,10 @@ Blocks are compound statements that consist of groups of other statements.
 
 A block always starts with a block signature followed by a curly brace.
 The signature indicates the block type and any other modifiers or other data
-that the block type may require. For example
+that the block type may require.
+
+Block bodies MAY start on a new line. There MAY be comments or blank lines
+between the block signature and the block body.
 
 ```
     # Block signature here is "optional one-of"
@@ -147,8 +150,9 @@ that the block type may require. For example
       "jamie"
     }
 
+    it "should match james or jamie"
     # Block signature here is 'it "should match james or jamie"'
-    it "should match james or jamie" {
+    {
       match "james"
       match "jamie"
     }
