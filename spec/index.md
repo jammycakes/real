@@ -114,8 +114,98 @@ The following character classes are used in this spec:
 - Unicode punctuation character: any character in the Unicode `P`
   (Punctuation) or `S` (Symbol) general categories.
 
-## 2.3. Directives, blocks, tokens and string literals
+## 2.3. Directives and blocks
 
 At the most fundamental level, a REAL document consists of a series of statements.
-Statements can be either blocks (containing nested statements) or directives
-(single-line instructions).
+Statements can be one of the following:
+
+Directives are single-line statements, for example raw text literals to be matched.
+
+```
+    "jamie"
+```
+
+Directives always start on a new line.
+
+Blocks are compound statements that consist of groups of other statements.
+
+```
+    one-of {
+      "james"
+      "jamie"
+    }
+```
+
+A block always starts with a block signature followed by a curly brace.
+The signature indicates the block type and any other modifiers or other data
+that the block type may require. For example
+
+```
+    # Block signature here is "optional one-of"
+    optional one-of {
+      "james"
+      "jamie"
+    }
+
+    # Block signature here is 'it "should match james or jamie"'
+    it "should match james or jamie" {
+      match "james"
+      match "jamie"
+    }
+```
+
+Comments begin with a `#` character and extend to the end of the line.
+`#` characters indicate the start of a comment at the end of a line unless
+they appear inside a quoted string.
+
+```
+    one-of {
+      # this is a comment
+      "james"
+      "jamie" # this is also a comment from the first # onwards
+      "# this is not a comment"
+      /# this is not a comment either/
+      [# nor is this]
+      [A-Za-z0-9] # but this is a comment from the first # onwards
+    }
+```
+
+Blank lines are ignored.
+
+## 2.4. Quoted strings
+
+Quoted strings may take one of the following forms.
+
+**String literals** are enclosed in single or double quotes. The opening and closing
+quote must match:
+
+```
+    "james"
+    'jamie'
+    "james's room"
+```
+
+Characters in string literals can be escaped using a backslash:
+
+```
+    'james\'s room'
+    "james\r\njamie"
+```
+
+**Raw regex literals** are enclosed in forward slashes, vertical bars, or backticks.
+These must match:
+
+```
+    /\s*james\s*/
+    |^jamie$|
+    `(james|jamie)`
+```
+
+Characters in raw regex literals are NOT escaped but are concatenated as-is into the
+regular expression under construction. They are not checked for syntax by the parser.
+
+**Character groups** are enclosed in square brackets:
+
+```
+    [A-Za-z0-9]
+```
