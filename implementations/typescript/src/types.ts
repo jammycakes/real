@@ -1,7 +1,11 @@
-export type AST = {
-  // Placeholder AST shape. Implementation to be added.
-  type?: string;
-  [key: string]: any;
-};
+export type {
+  AST,
+  BlockBodyNode,
+  BlockNode,
+  BlockSignatureNode,
+  DirectiveNode,
+  DocumentNode,
+  StatementNode
+} from "./ast";
 
 export type RegexMap = Record<string, string>;

@@ -1,9 +1,10 @@
 import { AST } from "./types";
 import { JavaScript as JS } from "./platforms/javascript";
+import { parseDocument } from "./parser";
 
 export const Real = {
   parse(source: string): AST {
-    throw new Error("Not implemented: Real.parse");
+    return parseDocument(source);
   },
 
   JavaScript: JS
